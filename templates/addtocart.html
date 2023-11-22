@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+<div class="container">
+    <div class="main-container">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+				<div class="container" style="margin-top: 50px;">
+					<div class="page-header">
+						<div class="row">
+							<div class="col-md-6 col-sm-12">
+								<div class="title">
+									<h4>Your Cart</h4>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-12 text-right">
+								<a class="btn btn-primary" href="/checkout" role="button">
+									<i class="fa fa-shopping-cart mr-2"></i> Checkout
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+                <!-- Basic table Start -->
+                <div class="pd-20 card-box mb-30" style="margin-top: 50px;">
+                    <div class="clearfix mb-20">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Products</h4>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cart in carts %}
+                                <tr>
+                                    <th scope="row">{{ cart.id }}</th>
+                                    <td>{{ cart.name }}</td>
+                                    <td>
+                                        <form action="/update_cart/{{ cart.id }}" method="post">
+                                            <div class="input-group">
+                                                <input type="number" name="quantity" value="{{ cart.quantity }}" class="form-control">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td>{{ cart.prize }}</td>
+                                    <td>
+                                        <a href="/remove_from_cart/{{ cart.id }}">
+                                            <button class="btn btn-danger">Remove</button>
+                                        </a>
+                                    </td>
+                                    <td>{{ cart.paid }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Basic table End -->
+            </div>
+        </div>
+    </div>
+</div>
+	
+{% endblock %}
+
+					

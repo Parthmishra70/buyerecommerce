@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+
+<div class="container mt-5">
+  <div class="row">
+      <div class="col-lg-6">
+          <h2>About Us</h2>
+          <p class="lead">
+              At <strong>SWM</strong>, we are committed to making a positive impact on the environment and communities through responsible solid waste management. With a strong focus on sustainability and environmental stewardship, we provide comprehensive waste disposal and recycling solutions. Our dedicated team is passionate about reducing waste, conserving resources, and promoting a cleaner, healthier future for all.
+          </p>
+          <p>
+              Driven by innovation and a deep sense of responsibility, we work closely with businesses, municipalities, and individuals to develop customized waste management strategies. From recycling programs and waste collection services to eco-friendly disposal methods, we strive to minimize the environmental footprint while maximizing the benefits to our clients.
+          </p>
+          <p>
+              Our mission is to create a world where waste is viewed as a resource, and we're dedicated to helping you achieve your sustainability goals. Join us on this journey toward a cleaner, greener, and more sustainable future.
+          </p>
+      </div>
+      <div class="col-lg-6" style="margin-bottom: 50px;">
+        <img src="{{ url_for('static', filename='images/about.jpeg') }}" alt="Team at Work" class="img-fluid">
+    </div>
+  </div>
+</div>
+
+
+  {% endblock %}

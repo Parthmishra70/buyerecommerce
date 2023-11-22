@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="{{ url_for('static', filename='/images/logo-no-background.svg') }}" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>GREEN KARMA</title>
+
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/bootstrap.css') }}" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- font awesome style -->
+  <link href="{{ url_for('static', filename='/css/font-awesome.min.css') }}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='/css/style.css') }}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{{ url_for('static', filename='/css/responsive.css') }}" rel="stylesheet" />
+
+
+  <!-- this is the catgory for -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="keywords" content="htmlcss bootstrap, multi level menu, submenu, treeview nav menu examples" />
+  <meta name="description"
+    content="Bootstrap 5 navbar multilevel treeview examples for any type of project, Bootstrap 5" />
+
+
+</head>
+
+<body>
+  <div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="/">
+            <span>
+              GREEN KARMA            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ">
+              <li class="nav-item {{homen}}">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item {{aboutn}}">
+                <a class="nav-link" href="/about"> About</a>
+              </li>
+              <li class="nav-item {{productn}}">
+                <a class="nav-link" href="/product">Products</a>
+              </li>
+
+              <li class="nav-item {{contactn}}">
+                <a class="nav-link" href="/contact">Contact Us</a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/logout">logout</a>
+              </li>
+
+              <li class="nav-item {{Ordern}}">
+                <a class="nav-link" href="/Order">Your Order</a>
+              </li>
+            </ul>
+            <div class="user_optio_box">
+              <a href="/signin">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                {{ name}}
+              </a>
+              <a href="/addcart">
+                Cart<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              </a>
+
+            </div>
+
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class="slider_section">
+      <div class="slider_bg_box">
+        <img src="{{ url_for('static', filename='/images/w.svg') }}" alt="">
+      </div>
+      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="detail-box" >
+                    <h1 class="text-dark">GREEN KARMA</h1>
+                    <p class="text-dark">"Efficiency in Waste, Sustainability in Life: Our Waste Management System."</p>
+                    <div class="btn-box">
+                      <a href="/contact" class="btn1">Contact Us</a>
+                      <a href="/about" class="btn2">About Us</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+    </section>
+    <!-- end slider section -->
+  </div>
+
+  {% block content %}
+  <!-- here the full content of each files -->
+  {% endblock %}
+
+  <!-- info section -->
+  <section class="info_section layout_padding2" style="margin-top: 50px;">
+    <div class="container">
+      <div class="info_logo">
+        <h2>
+          GREEN KARMA        </h2>
+      </div>
+      <div class="row">
+
+        <div class="col-md-3">
+          <div class="info_contact">
+            <h5>
+              About Shop
+            </h5>
+            <div>
+              <div class="img-box">
+                <img src="{{ url_for('static', filename='/images/location-white.png') }}" width="18px" alt="">
+              </div>
+              <p>
+                Address
+              </p>
+            </div>
+            <div>
+              <div class="img-box">
+                <img src="{{ url_for('static', filename='/images/telephone-white.png') }}" width="12px" alt="">
+              </div>
+              <p>
+                +01 1234567890
+              </p>
+            </div>
+            <div>
+              <div class="img-box">
+                <img src="{{ url_for('static', filename='/images/envelope-white.png') }}" width="18px" alt="">
+              </div>
+              <p>
+                demo@gmail.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_info">
+            <h5>
+              Informations
+            </h5>
+            <p>
+              "Efficiency in Waste, Sustainability in Life: Our Waste Management System."            </p>
+          </div>
+        </div>
+
+    
+        <div class="col-md-3">
+          <div class="info_form ">
+            <h5>
+              Our Teams
+            </h5>
+            <ul><li>Parth mishra</li><li> Rutvik Parmar</li><li> Rozmina Pinjara</li></ul>
+            
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="info_form ">
+            <h5>
+              Another APP
+            </h5>
+            <a href="">ECO KARAMA App</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+ 
+  <!-- footer section -->
+  <section class="footer_section">
+    <div class="container">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="/">GREEN KARMA</a>
+      </p>
+    </div>
+  </section>
+  <!-- footer section -->
+  <!-- jQery -->
+  <script type="text/javascript" src="{{ url_for('static', filename='/js/jquery-3.4.1.min.js') }}"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="{{ url_for('static', filename='/js/bootstrap.js') }}"></script>
+  <!-- custom js -->
+  <script type="text/javascript" src="{{ url_for('static', filename='/js/custom.js') }}"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+
+</body>
+
+</html>

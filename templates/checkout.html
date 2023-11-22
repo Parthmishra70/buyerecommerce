@@ -1,0 +1,321 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<head>
+	<!-- Basic Page Info -->
+	<meta charset="utf-8" />
+	<title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+
+	<!-- Site favicon -->
+	<link rel="apple-touch-icon" sizes="180x180"
+		href="{{ url_for('static', filename='/vendors/images/apple-touch-icon.png') }}" />
+	<link rel="icon" type="image/png" sizes="32x32"
+		href="{{ url_for('static', filename='/vendors/images/favicon-32x32.png') }}" />
+	<link rel="icon" type="image/png" sizes="16x16"
+		href="{{ url_for('static', filename='/vendors/images/favicon-16x16.png') }}" />
+
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+		rel="stylesheet" />
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/vendors/styles/core.css') }}" />
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static', filename='/vendors/styles/icon-font.min.css') }}" />
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static', filename='/src/plugins/datatables/css/dataTables.bootstrap4.min.css') }}" />
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static', filename='/vsrc/plugins/datatables/css/responsive.bootstrap4.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/vendors/styles/style.css') }}" />
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"></script>
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2973766580778258"
+		crossorigin="anonymous"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag("js", new Date());
+
+		gtag("config", "G-GBZ3SGGX85");
+	</script>
+	<!-- Google Tag Manager -->
+	<script>
+		(function (w, d, s, l, i) {
+			w[l] = w[l] || [];
+			w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+			var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s),
+				dl = l != "dataLayer" ? "&l=" + l : "";
+			j.async = true;
+			j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+			f.parentNode.insertBefore(j, f);
+		})(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+	</script>
+	<!-- End Google Tag Manager -->
+</head>
+
+
+{% if error %}
+<div class="alert alert-success alert-dismissible fade show" role="alert" id="myAlert">
+	<strong>{{ error }}</strong>
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>	
+{% endif %}
+
+
+
+
+<div class="container">
+	<div class="py-5 text-center">
+		<h2>Checkout form</h2>
+		<p class="lead">Below is an form built entirely with Bootstrap’s form controls. Each required form group has a
+			validation state that can be triggered by attempting to submit the form without completing it.</p>
+	</div>
+	<div class="row">
+		<div class="col-md-4 order-md-2 mb-4">
+			<h4 class="d-flex justify-content-between align-items-center mb-3">
+				<span class="text-muted">Your cart</span>
+				<span class="badge badge-secondary badge-pill">{{total_quantity}}</span>
+			</h4>
+			<ul class="list-group mb-3 sticky-top">
+
+				{% for cart in carts %}
+				<li class="list-group-item d-flex justify-content-between lh-condensed">
+					<div>
+						<h6 class="my-0">{{cart.name}}</h6>
+						<small class="text-muted">Quantity:{{cart.quantity}}</small>
+					</div>
+					<span class="text-muted">{{cart.prize}}</span>
+				</li>
+				{% endfor %}
+
+				<li class="list-group-item d-flex justify-content-between">
+					<span>Total</span>
+					<strong>{{total_prize}}</strong>
+				</li>
+			</ul>
+
+		</div>
+		<div class="col-md-8 order-md-1">
+			<h4 class="mb-3">Billing address</h4>
+
+
+			<!-- this is user for  -->
+			<!-- <form class="needs-validation" novalidate="" action="/placing" method="post">
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="firstName">First name</label>
+						<input type="text" class="form-control" id="firstName" placeholder="" value="" name="recname" required>
+						<div class="invalid-feedback">Valid first name is required.</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="phone">Phone Number</label>
+						<input type="tel" class="form-control" id="phone" placeholder="1234567890" name="phone" minlength="10" maxlength="10" required>
+						<div class="invalid-feedback">Please enter a valid 10-digit Phone Number.</div>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="address">Address</label>
+					<input type="text" class="form-control" id="coordinates" placeholder="1234 Main St" name="address" required>
+					<div class="invalid-feedback">Please enter your shipping address.</div>
+				</div>
+				<hr class="mb-4">
+				<h4 class="mb-3">Payment</h4>
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="cc-name">Name on card</label>
+						<input type="text" class="form-control" id="cc-name" placeholder="" minlength="10" required>
+						<small class="text-muted">Full name as displayed on card</small>
+						<div class="invalid-feedback">Name on card is required</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="cc-number">Credit card number</label>
+						<input type="tel" class="form-control" id="cc-number" placeholder="16-digit number" minlength="16" maxlength="16" required name="cardnum">
+						<div class="invalid-feedback">Credit card number is required</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 mb-3">
+						<label for="cc-expiration">Expiration</label>
+						<input type="text" class="form-control" id="cc-expiration" placeholder="MM/YY" pattern="\d{2}/\d{2}" required name="expiration">
+						<div class="invalid-feedback">Expiration date required (MM/YY format).</div>
+					</div>
+					<div class="col-md-3 mb-3">
+						<label for="cc-cvv">CVV</label>
+						<input type="tel" class="form-control" id="cc-cvv" placeholder="123" minlength="3" maxlength="3" required name="cvv">
+						<div class="invalid-feedback">Security code required</div>
+					</div>
+				</div>
+				<hr class="mb-4">
+				<button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+			</form> -->
+
+
+
+			<form class="needs-validation" novalidate="" action="/placing" method="post">
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="firstName">First name</label>
+						<input type="text" class="form-control" id="firstName" placeholder="" value="" name="recname"
+							required>
+						<div class="invalid-feedback">Valid first name is required.</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="phone">Phone Number</label>
+						<input type="tel" class="form-control" id="phone" placeholder="1234567890" name="phone"
+							minlength="10" maxlength="10" required>
+						<div class="invalid-feedback">Please enter a valid 10-digit Phone Number.</div>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="address">COMPANY Address</label>
+					<input type="text" class="form-control" id="coordinates" placeholder="1234 Main St" name="address"
+						required>
+					<div class="invalid-feedback">Please enter your shipping COMPANYaddress.</div>
+				</div>
+				<div class="mb-3">
+					<label for="address">COMPANY Name</label>
+					<input type="text" class="form-control" id="coordinates" placeholder="1234 Main St"
+						name="companyname" required>
+					<div class="invalid-feedback">Please enter your shipping address.</div>
+				</div>
+				<div class="mb-3">
+					<label for="address">Website Name (optionl)</label>
+					<input type="text" class="form-control" id="coordinates" placeholder="1234 Main St"
+						name="websitename" required>
+					<div class="invalid-feedback">Please enter your shipping address.</div>
+				</div>
+
+				<div class="mb-3">
+					<label for="address">GST Number</label>
+					<input type="text" class="form-control" id="coordinates" name="gstnumber" required>
+					<div class="invalid-feedback">Please enter your shipping address.</div>
+				</div>
+				<div class="mb-3">
+					<label for="address">Pan Number</label>
+					<input type="text" class="form-control" id="coordinates" name="pan" required>
+					<div class="invalid-feedback">Please enter your shipping address.</div>
+				</div>
+				<div class="mb-3">
+					<label for="address">Tan Number</label>
+					<input type="text" class="form-control" id="coordinates" name="tan" required>
+					<div class="invalid-feedback">Please enter your shipping address.</div>
+				</div>
+
+				<!-- toggle -->
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="shipping" id="flexRadioDefault1" value="						Transportation required
+					">
+					<label class="form-check-label" for="flexRadioDefault1">
+						Transportation required
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="shipping" id="flexRadioDefault2" checked value="	Or Not">
+					<label class="form-check-label" for="flexRadioDefault2">
+						Or Not </label>
+				</div>
+
+				<!-- pyment detils -->
+				<hr class="mb-4">
+				<h4 class="mb-3">Payment</h4>
+				<div class="row">
+					<div class="col-md-6 mb-3">
+						<label for="cc-name">Name on card</label>
+						<input type="text" class="form-control" id="cc-name" placeholder="" minlength="10" required>
+						<small class="text-muted">Full name as displayed on card</small>
+						<div class="invalid-feedback">Name on card is required</div>
+					</div>
+					<div class="col-md-6 mb-3">
+						<label for="cc-number">Credit card number</label>
+						<input type="tel" class="form-control" id="cc-number" placeholder="16-digit number"
+							minlength="16" maxlength="16" required name="cardnum">
+						<div class="invalid-feedback">Credit card number is required</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-3 mb-3">
+						<label for="cc-expiration">Expiration</label>
+						<input type="text" class="form-control" id="cc-expiration" placeholder="MM/YY"
+							pattern="\d{2}/\d{2}" required name="expiration">
+						<div class="invalid-feedback">Expiration date required (MM/YY format).</div>
+					</div>
+
+					<div class="col-md-3 mb-3">
+						<label for="cc-cvv">CVV</label>
+						<input type="tel" class="form-control" id="cc-cvv" placeholder="123" minlength="3" maxlength="3"
+							required name="cvv">
+						<div class="invalid-feedback">Security code required</div>
+					</div>
+				</div>
+				<hr class="mb-4">
+				<button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+			</form>
+
+			<h1>{{ error }}</h1>
+		</div>
+
+	</div>
+	<footer class="my-5 pt-5 text-muted text-center text-small">
+		<p class="mb-1">© 2017-2019 Company Name</p>
+		<ul class="list-inline">
+			<li class="list-inline-item"><a href="#">Privacy</a></li>
+			<li class="list-inline-item"><a href="#">Terms</a></li>
+			<li class="list-inline-item"><a href="#">Support</a></li>
+		</ul>
+	</footer>
+</div>
+
+
+
+
+
+<script>
+	const coordinatesInput = document.getElementById("coordinates");
+
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		} else {
+			alert("Geolocation is not supported by this browser.");
+		}
+	}
+
+	function showPosition(position) {
+		// Concatenate latitude and longitude with a space in between
+		const coordinates = position.coords.latitude + " " + position.coords.longitude;
+		coordinatesInput.value = coordinates;
+	}
+</script>
+
+
+
+<!-- welcome modal end -->
+<!-- js -->
+<script src="{{ url_for('static', filename='/vendors/scripts/core.js') }}"></script>
+<script src="{{ url_for('static', filename='/vendors/scripts/script.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/vendors/scripts/process.js') }}"></script>
+<script src="{{ url_for('static', filename='/vendors/scripts/layout-settings.js') }}"></script>
+<script src="{{ url_for('static', filename='/src/plugins/apexcharts/apexcharts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for('static', filename='/vendors/scripts/dashboard3.js') }}"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
+		style="display: none; visibility: hidden"></iframe></noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS" height="0" width="0"
+		style="display: none; visibility: hidden"></iframe></noscript>
+
+
+
+{% endblock %}

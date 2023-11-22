@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+<!-- product section -->
+
+<section class="product_section ">
+  <div class="container">
+    <div class="product_heading">
+      <h2>
+        Products
+      </h2>
+    </div>
+    <div class="product_container">
+
+
+      {% for item in item %}
+
+      <div class="box">
+        <div class="box-content">
+          <div class="img-box">
+            {% set fname = 'item/' + item.img %}
+            <img src="{{ url_for('static', filename=fname) }}" alt="">
+          </div>
+          <div class="detail-box">
+            <div class="text text-centre">
+              <h6>
+                {{item.name}} </h6>
+              <h5>
+                <span>₹</span> {{item.price}}
+              </h5>
+            </div>
+
+          </div>
+        </div>
+        <div class="btn-box">
+          <a href="/item/{{ item.slug }}">
+            Add To Cart
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+
+
+
+    </div>
+  </div>
+</section>
+
+
+<a href="/product"><button type="button" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 20px;border-radius: 10px;">More Products </button></a>
+
+
+
+
+{% endblock %}

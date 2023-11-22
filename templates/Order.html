@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+
+<!-- Basic table Start -->
+<div class="container" style="margin-bottom: 50px;">
+    <div class="pd-20 card-box mb-30" style="margin-top: 50px;">
+        <div class="clearfix mb-20">
+            <div class="pull-left">
+                <h4 class="text-blue h4">Your Products</h4>
+            </div>
+        </div>
+        {% for order in placing %}
+
+        <div class="card" style="width: 18rem;">
+            {% set fname = 'item/' + order.img %}
+            <img class="card-img-top" src="{{ url_for('static', filename=fname) }}" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">Name: {{ order.productname }}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="table-responsive" style="margin-top: 50px;">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in placing %}
+                    <tr>
+                        <th scope="row">{{ order.id }}</th>
+                        <td>{{ order.productname }}</td>
+                        <td>{{ order.productquantity }}</td>
+                        <td>{{ order.prize }}</td>
+                        <td>
+                            <form action="/Cancel/{{ order.id }}" method="post">
+                                <button class="btn btn-danger">Cancel</button>
+
+                        </td>
+                        </form>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

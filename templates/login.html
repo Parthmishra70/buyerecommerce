@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <script src="../static/css/assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>Signin Template · Bootstrap v5.3</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="../static/css/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+        /* Initially hide forms with the "form--hidden" class */
+.form--hidden {
+    display: none;
+}
+
+/* Show forms with the "form--unhidden" class */
+.form--unhidden {
+    display: block;
+}
+
+        /* ... (other CSS styles) ... */
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="../static/css/sign-in.css" rel="stylesheet">
+</head>
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+
+
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <!-- ... (SVG symbols) ... -->
+    </svg>
+
+
+
+    <main class="form-signin w-100 m-auto">
+        <!-- Sign-in Form -->
+        <form class="form--unhidden" id="Login" action="/signin" method="post">
+            <img class="mb-4" src="{{ url_for('static', filename='images/logoSWM.png') }}" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                <label for "floatingPassword">Password</label>
+            </div>
+
+            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+            <button class="btn btn w-100 py-2" type="button" id="linkCreateAccount">Sign Up</button>
+            <button class="btn btn-primary w-100 py-2" type="button" id="Empbutton">If you're an Employee</button>
+        </form>
+
+        <!-- Sign-up Form -->
+        <form class="form--hidden" id="CreateAccount" action="/signup" method="post">
+            <img class="mb-4" src="{{ url_for('static', filename='/images/logoSWM.png') }}" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingName" placeholder="Name" name="name">
+                <label for="floatingName">Name</label>
+            </div>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" name="username">
+                <label for="floatingEmail">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPasswordSignup" placeholder="Password" name="password">
+                <label for="floatingPasswordSignup">Password</label>
+            </div>
+
+            <button class="btn btn-primary w-100 py-2" type="submit">Sign Up</button>
+            <p class="form__text" id="ToLogin">
+                <a class="form__link" href="#ChangeLogin" id="linkLogin">Already have an account? Sign in</a>
+            </p>
+        </form>
+
+        <!-- Employee Sign-in Form -->
+        <form class="form--hidden" id="Empform" action="/emp" method="post">
+            <img class="mb-4" src="{{ url_for('static', filename='/images/logoSWM.png') }}" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Employee sign in</h1>
+
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingEmpEmail" placeholder="name@example.com" name="username">
+                <label for="floatingEmpEmail">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingEmpPassword" placeholder="Password" name="password">
+                <label for="floatingEmpPassword">Password</label>
+            </div>
+
+            <button class="btn btn-primary w-100 py-2" type="submit">If you're an Employee</button>
+            
+        </form>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var create = document.getElementById("linkCreateAccount");
+            var haveAcc = document.getElementById("linkLogin");
+            var formLogin = document.getElementById("Login");
+            var formCreateAcc = document.getElementById("CreateAccount");
+            var Empbutton = document.getElementById("Empbutton");
+            var Empform = document.getElementById("Empform");
+
+            create.addEventListener("click", function (e) {
+                e.preventDefault();
+                hide(formLogin);
+                hide(Empform);
+                show(formCreateAcc);
+                // show(Empform);
+
+            });
+
+            haveAcc.addEventListener("click", function (e) {
+                e.preventDefault();
+                show(formLogin);
+                hide(formCreateAcc);
+                hide(Empform);
+
+            });
+
+            Empbutton.addEventListener("click", function (e) {
+                e.preventDefault();
+                hide(formCreateAcc);
+                hide(formLogin);
+                show(Empform);
+            });
+
+            function hide(elem) {
+                elem.classList.add("form--hidden");
+                elem.classList.remove("form--unhidden");
+            }
+
+            function show(elem) {
+                elem.classList.add("form--unhidden");
+                elem.classList.remove("form--hidden");
+            }
+        });
+    </script>
+
+{% if error_message %}
+<script>
+alert("{{error_message}}");
+</script>
+{% endif %}
+    <script src="{{ url_for('static', filename='/assets/dist/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
